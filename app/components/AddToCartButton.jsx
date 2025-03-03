@@ -16,7 +16,9 @@ export function AddToCartButton({
   lines,
   onClick,
 }) {
+  console.log(JSON.stringify(analytics))
   return (
+    
     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
       {(fetcher) => (
         <>

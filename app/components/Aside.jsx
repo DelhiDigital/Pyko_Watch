@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useState} from 'react';
+import { X } from "lucide-react";
 
 /**
  * A side bar component with Overlay
@@ -47,9 +48,14 @@ export function Aside({children, heading, type}) {
         <header>
           {/* <h3>{heading}</h3> */}
           <h3>Cart</h3>
-          <button className="close reset" onClick={close} aria-label="Close">
-            &times;
-          </button>
+          
+<button 
+      className="close reset flex items-center justify-center p-0 rounded-full bg-gray-200 hover:bg-gray-300 transition-all duration-200 "
+      onClick={close} 
+      aria-label="Close"
+    >
+      <X className="w-5 h-5 text-gray-600 hover:text-gray-800" />
+    </button>
         </header>
         <main>{children}</main>
       </aside>
