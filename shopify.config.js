@@ -1,7 +1,7 @@
 export default {
     storefront: {
-      storeDomain: 'anil-t-shirt.myshopify.com',
-      storefrontToken: '89df6f25f155615a7abd709db000a18f',
+      storeDomain: 'pyko-watches.myshopify.com',
+      storefrontToken: '86043212d493bd657dfd0948763975d0',
       storefrontApiVersion: '2024-01',
     },
-  };
+  }; 

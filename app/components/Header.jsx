@@ -2,6 +2,8 @@ import {Suspense} from 'react';
 import {Await, NavLink, useAsyncValue} from '@remix-run/react';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
+import React from "react";
+import { ShoppingCart, User, Menu } from "lucide-react";
 
 /**
  * @param {HeaderProps}
@@ -12,7 +14,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         {/* <strong>{shop.name}</strong> */}
-        <strong className='text-3xl'>Pyko</strong>
+        <strong className='text-3xl'>PYKO</strong>
       </NavLink>
       {/* <HeaderMenu
         menu={menu}
@@ -22,6 +24,55 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain}) {
       /> */}
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
+    // <header className="w-full bg-black text-white fixed top-0 left-0 flex justify-between items-center px-6 py-4 shadow-md">
+    //   {/* Left: Mobile Menu Button (for smaller screens) */}
+    //   <button className="lg:hidden text-white">
+    //     <Menu size={28} />
+    //   </button>
+
+    //   {/* Center: Logo */}
+    //   <NavLink prefetch="intent" to="/" className="text-4xl font-serif tracking-wide">
+    //     PYKO
+    //   </NavLink>
+
+    //   {/* Right: Navigation & Icons */}
+    //   <nav className="hidden lg:flex gap-8 text-lg">
+    //     <NavLink to="/" className="hover:text-gray-400 transition duration-200">
+    //       Home
+    //     </NavLink>
+    //     <NavLink to="/shop" className="hover:text-gray-400 transition duration-200">
+    //       Shop
+    //     </NavLink>
+    //     <NavLink to="/about" className="hover:text-gray-400 transition duration-200">
+    //       About
+    //     </NavLink>
+    //     <NavLink to="/contact" className="hover:text-gray-400 transition duration-200">
+    //       Contact
+    //     </NavLink>
+    //   </nav>
+
+    //   {/* Right: Icons */}
+    //   <div className="flex items-center gap-6">
+    //     {isLoggedIn ? (
+    //       <NavLink to="/account" className="hover:text-gray-400 transition duration-200">
+    //         <User size={24} />
+    //       </NavLink>
+    //     ) : (
+    //       <NavLink to="/login" className="hover:text-gray-400 transition duration-200">
+    //         Login
+    //       </NavLink>
+    //     )}
+
+    //     <NavLink to="/cart" className="relative hover:text-gray-400 transition duration-200">
+    //       <ShoppingCart size={24} />
+    //       {cart?.totalItems > 0 && (
+    //         <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+    //           {cart.totalItems}
+    //         </span>
+    //       )}
+    //     </NavLink>
+    //   </div>
+    // </header>
   );
 }
 
@@ -90,14 +141,14 @@ function HeaderCtas({isLoggedIn, cart}) {
   return (
     <nav className="header-ctas" role="navigation">
       <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+      {/* <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
             {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Sign in')}
           </Await>
         </Suspense>
-      </NavLink>
-      <SearchToggle />
+      </NavLink> */}
+      {/* <SearchToggle /> */}
       <CartToggle cart={cart} />
     </nav>
   );

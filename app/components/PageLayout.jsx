@@ -4,6 +4,11 @@ import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/CartMain';
+// import {HeroSection} from '~/components/Banner';
+import React from "react";
+import { useEffect, useRef } from "react";
+import {HeroSection} from '~/components/HeroSection';
+import {ScrlItemText} from '~/components/ScrollingItemText';
 
 import {
   SEARCH_ENDPOINT,
@@ -14,6 +19,10 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 /**
  * @param {PageLayoutProps}
  */
+
+
+
+
 export function PageLayout({
   cart,
   children = null,
@@ -22,26 +31,37 @@ export function PageLayout({
   isLoggedIn,
   publicStoreDomain,
 }) {
+
+
+  
   return (
-    <Aside.Provider>
-      <CartAside cart={cart} />
-      <SearchAside />
-      <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
-      {header && (
-        <Header
-          header={header}
-          cart={cart}
-          isLoggedIn={isLoggedIn}
-          publicStoreDomain={publicStoreDomain}
-        />
-      )}
-      <main>{children}</main>
-      <Footer
-        footer={footer}
-        header={header}
-        publicStoreDomain={publicStoreDomain}
-      />
-    </Aside.Provider>
+    // <Aside.Provider>
+    //   <CartAside cart={cart} />
+    //   <SearchAside />
+    //   <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
+    //   {header && (
+    //     <Header
+    //       header={header}
+    //       cart={cart}
+    //       // isLoggedIn={isLoggedIn}
+    //       // publicStoreDomain={publicStoreDomain}
+    //     />
+    //   )}
+    //   {/* <HeroSectiond/> */}
+    //   {/* <main>{children}</main> */}
+    //   <main>
+        
+    // </main>
+    //   <Footer
+    //     footer={footer}
+    //     header={header}
+    //     publicStoreDomain={publicStoreDomain}
+    //   />
+    // </Aside.Provider>
+    <>
+    <HeroSection />
+    {/* <ScrlItemText/> */}
+    </>
   );
 }
 
