@@ -6,7 +6,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import badgePk2White from '../assets/badge-PK-2-white.png';
 import group3 from '../assets/group-3.png';
 import watchReference from '../assets/watch-reference.png';
-import bg1 from '../assets/bg1.jpeg';
+import bg1 from '../assets/bg1.png';
 import logoWhite from '../assets/logo-white-2.png';
 
 // Register GSAP plugins
@@ -78,8 +78,8 @@ export function HeroSection() {
         {
           y: '5%', // Slight downward movement
           scale: 0.95, // Slightly reduce size
-          // rotate: -15, // Slight rotation
-          duration: 1,
+          // rotate: 0, // Slight rotation
+          duration: 2,
         },
         '-=1.5',
       ); // Start at the same time as text animation
@@ -132,17 +132,17 @@ export function HeroSection() {
           alt="PYKO Watch"
           className="w-[700px] h-auto object-contain"
         />
-        <p
+        
+      </div>
+
+      {/* Tagline */}
+      <p
         ref={taglineRef}
         className="absolute text-white text-lg lg:text-2xl opacity-0 transform translate-y-8"
         style={{top: 'calc(100% - 120px)'}}
       >
         Time Redesigned.
       </p>
-      </div>
-
-      {/* Tagline */}
-
       {/* Floating Icons - Using placeholders */}
       <div className="absolute w-7 md:w-7 top-6 left-6 z-30">
         <img src={group3} alt="Group Icon" className="w-full h-auto" />

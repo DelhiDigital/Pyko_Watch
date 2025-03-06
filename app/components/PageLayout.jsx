@@ -8,7 +8,6 @@ import {CartMain} from '~/components/CartMain';
 import React from "react";
 import { useEffect, useRef } from "react";
 import {HeroSection} from '~/components/HeroSection';
-import {ScrlItemText} from '~/components/ScrollingItemText';
 
 import {
   SEARCH_ENDPOINT,
@@ -58,10 +57,7 @@ export function PageLayout({
     //     publicStoreDomain={publicStoreDomain}
     //   />
     // </Aside.Provider>
-    <>
     <HeroSection />
-    {/* <ScrlItemText/> */}
-    </>
   );
 }
 
