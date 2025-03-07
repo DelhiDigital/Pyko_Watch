@@ -1,17 +1,24 @@
 import {Await, Link} from '@remix-run/react';
-import {Suspense, useId} from 'react';
+import {useId, Suspense, lazy} from 'react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/CartMain';
 // import {HeroSection} from '~/components/Banner';
-import React from "react";
-import { useEffect, useRef } from "react";
+import React from 'react';
 import {HeroSection} from '~/components/HeroSection';
 import ScrlItemText from '~/components/ScrlItemText';
 import badgePk2White from '../assets/badge-PK-2-white.png';
 import group3 from '../assets/group-3.png';
+import '../styles/app.css';
 
+// Lazy load the Model3d component with error boundary
+const Model3d = lazy(() => 
+  import('../components/Model3d').catch(err => {
+    console.error('Error loading Model3d:', err);
+    return { default: () => <div>Error loading 3D model</div> };
+  })
+);
 
 import {
   SEARCH_ENDPOINT,
@@ -23,9 +30,6 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
  * @param {PageLayoutProps}
  */
 
-
-
-
 export function PageLayout({
   cart,
   children = null,
@@ -34,9 +38,6 @@ export function PageLayout({
   isLoggedIn,
   publicStoreDomain,
 }) {
-
-
-  
   return (
     // <Aside.Provider>
     //   <CartAside cart={cart} />
@@ -53,7 +54,7 @@ export function PageLayout({
     //   {/* <HeroSectiond/> */}
     //   {/* <main>{children}</main> */}
     //   <main>
-        
+
     // </main>
     //   <Footer
     //     footer={footer}
@@ -61,21 +62,27 @@ export function PageLayout({
     //     publicStoreDomain={publicStoreDomain}
     //   />
     // </Aside.Provider>
-    <div> 
-  <HeroSection />
-  <ScrlItemText />
+    <div>
+      <HeroSection />
+      <ScrlItemText />
+      <div className="min-h-screen">
+        <Suspense fallback={<div className="text-black bg-black p-4">Loading 3D Model...</div>}>
+          <Model3d />
+        </Suspense>
+        <div className="h-screen"></div>
+      </div>
 
-  {/* Group Icon (Always at the Top-Left) */}
-  <div className="fixed w-7 md:w-7 top-6 left-6 z-50">
-    <img src={group3} alt="Group Icon" className="w-full h-auto" />
-  </div>
+      {/* Header Hamburger */}
+      {/* Group Icon (Always at the Top-Left) */}
+      <div className="fixed w-7 md:w-7 top-6 left-6 z-50">
+        <img src={group3} alt="Group Icon" className="w-full h-auto" />
+      </div>
 
-  {/* Badge Icon (Always at the Top-Right) */}
-  <div className="fixed w-12 md:w-16 top-6 right-6 z-50">
-    <img src={badgePk2White} alt="Badge PK" className="w-full h-auto" />
-  </div>
-</div>
-   
+      {/* Badge Icon (Always at the Top-Right) */}
+      <div className="fixed w-12 md:w-16 top-6 right-6 z-50">
+        <img src={badgePk2White} alt="Badge PK" className="w-full h-auto" />
+      </div>
+    </div>
   );
 }
 

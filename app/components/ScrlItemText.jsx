@@ -128,8 +128,8 @@ export default function ScrlItemText() {
       {/* Orange Bar at Bottom */}
       <div
         ref={orangeBarRef}
-        className="mt-50 h-6 bg-[#FF5F2E] opacity-0 "
-        style={{ width: "100px" }}
+        className="mt-50 h-6  bg-[#FF5F2E] opacity-0 "
+        style={{ width: "150px" }}
       ></div>
     </div>
   );
