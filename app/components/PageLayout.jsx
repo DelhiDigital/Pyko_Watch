@@ -8,6 +8,10 @@ import {CartMain} from '~/components/CartMain';
 import React from "react";
 import { useEffect, useRef } from "react";
 import {HeroSection} from '~/components/HeroSection';
+import ScrlItemText from '~/components/ScrlItemText';
+import badgePk2White from '../assets/badge-PK-2-white.png';
+import group3 from '../assets/group-3.png';
+
 
 import {
   SEARCH_ENDPOINT,
@@ -57,7 +61,21 @@ export function PageLayout({
     //     publicStoreDomain={publicStoreDomain}
     //   />
     // </Aside.Provider>
-    <HeroSection />
+    <div> 
+  <HeroSection />
+  <ScrlItemText />
+
+  {/* Group Icon (Always at the Top-Left) */}
+  <div className="fixed w-7 md:w-7 top-6 left-6 z-50">
+    <img src={group3} alt="Group Icon" className="w-full h-auto" />
+  </div>
+
+  {/* Badge Icon (Always at the Top-Right) */}
+  <div className="fixed w-12 md:w-16 top-6 right-6 z-50">
+    <img src={badgePk2White} alt="Badge PK" className="w-full h-auto" />
+  </div>
+</div>
+   
   );
 }
 

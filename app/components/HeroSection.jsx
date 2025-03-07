@@ -1,6 +1,6 @@
 'use client';
 
-import {useLayoutEffect, useRef} from 'react';
+import {useLayoutEffect, useRef, useEffect} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import badgePk2White from '../assets/badge-PK-2-white.png';
@@ -19,73 +19,66 @@ export function HeroSection() {
   const watchRef = useRef(null);
   const containerRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Initial setup - text starts behind watch
-      gsap.set(textRef.current, {
-        zIndex: 0,
-        y: '-1%', // Start slightly lower
-      });
-      gsap.set(textRef2.current, {
-        zIndex: 0,
-        y: '1%', // Start slightly lower
-      });
-
-      // Animation timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-          pin: true, // Pin the section during animation
-          pinSpacing: true,
-        },
-      });
-      tl.to(textRef2.current, {
-        opacity: 0,
-        // y: '80%', // Move text upward
-        // scale: 0.5, // Slightly enlarge
-        zIndex: 0, // Bring text in front of watch
-        duration: 0.5,
-      });
-      // Animate PYKO text
-      tl.to(textRef.current, {
-        y: '-60%', // Move text upward
-        scale: 0.6, // Slightly enlarge
-        zIndex: 0, // Bring text in front of watch
-        duration: 1,
-      });
-      
-      
-
-      // Animate tagline to appear
-      tl.to(
-        taglineRef.current,
-        {
-          opacity: 1,
-          y: '-100%',
+ 
+  useEffect(() => {
+    if (typeof window !== "undefined") { // Ensures it runs only on client
+      const ctx = gsap.context(() => {
+        // Initial setup - text starts behind watch
+        gsap.set(textRef.current, { zIndex: 0, y: "-1%" });
+        gsap.set(textRef2.current, { zIndex: 0, y: "1%" });
+  
+        // Animation timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+            pin: true,
+            pinSpacing: true,
+          },
+        });
+  
+        // Animate Reflection Disappearance
+        tl.to(textRef2.current, {
+          opacity: 0,
+          zIndex: 0,
           duration: 0.5,
-        },
-        '-=1.5',
-      ); // Start slightly before the text animation completes
-
-      
-
-      // Subtle watch animation
-      tl.to(
-        watchRef.current,
-        {
-          y: '5%', // Slight downward movement
-          scale: 0.95, // Slightly reduce size
-          // rotate: 0, // Slight rotation
-          duration: 2,
-        },
-        '-=1.5',
-      ); // Start at the same time as text animation
-    }, containerRef);
-
-    return () => ctx.revert(); // Clean up animation on unmount
+        });
+  
+        // Animate PYKO text
+        tl.to(textRef.current, {
+          y: "-60%",
+          scale: 0.6,
+          zIndex: 0,
+          duration: 1,
+        });
+  
+        // Animate tagline to appear
+        tl.to(
+          taglineRef.current,
+          {
+            opacity: 1,
+            y: "-100%",
+            duration: 0.5,
+          },
+          "-=1.5"
+        );
+  
+        // Subtle watch animation
+        tl.to(
+          watchRef.current,
+          {
+            y: "5%",
+            scale: 0.95,
+            duration: 2,
+          },
+          "-=1.5"
+        );
+      }, containerRef);
+  
+      return () => ctx.revert(); // Clean up animation on unmount
+    }
   }, []);
 
   return (
@@ -141,15 +134,15 @@ export function HeroSection() {
         className="absolute text-white text-lg lg:text-2xl opacity-0 transform translate-y-8"
         style={{top: 'calc(100% - 120px)'}}
       >
-        Time Redesigned.
+      Time Redesigned.
       </p>
       {/* Floating Icons - Using placeholders */}
-      <div className="absolute w-7 md:w-7 top-6 left-6 z-30">
+      {/* <div className="absolute w-7 md:w-7 top-6 left-6 z-30">
         <img src={group3} alt="Group Icon" className="w-full h-auto" />
       </div>
       <div className="absolute w-12 md:w-16 top-6 right-6 z-30">
         <img src={badgePk2White} alt="Badge PK" className="w-full h-auto" />
-      </div>
+      </div> */}
     </div>
   );
 }
