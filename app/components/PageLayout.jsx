@@ -1,13 +1,15 @@
+import React from 'react';
 import {Await, Link} from '@remix-run/react';
-import {Suspense, useId} from 'react';
+import {useId, Suspense, lazy, useState, useEffect, useRef} from 'react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/CartMain';
 // import {HeroSection} from '~/components/Banner';
-import React from "react";
-import { useEffect, useRef } from "react";
 import {HeroSection} from '~/components/HeroSection';
+import '../styles/app.css';
+// Use React.lazy 
+const Model3d = lazy(() => import('../components/Model3d'));
 
 import {
   SEARCH_ENDPOINT,
@@ -19,8 +21,18 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
  * @param {PageLayoutProps}
  */
 
+const Model3dComponent = () => {
+  const [Model3d, setModel3d] = useState(null);
 
+  useEffect(() => {
+    import('../components/Model3d')
+      .then((mod) => setModel3d(() => mod.default))
+      .catch((err) => console.error('Failed to load Model3d:', err));
+  }, []);
 
+  if (!Model3d) return <p className="text-black">Loading 3D Model...</p>;
+  return <Model3d />;
+};
 
 export function PageLayout({
   cart,
@@ -30,9 +42,6 @@ export function PageLayout({
   isLoggedIn,
   publicStoreDomain,
 }) {
-
-
-  
   return (
     // <Aside.Provider>
     //   <CartAside cart={cart} />
@@ -49,7 +58,7 @@ export function PageLayout({
     //   {/* <HeroSectiond/> */}
     //   {/* <main>{children}</main> */}
     //   <main>
-        
+
     // </main>
     //   <Footer
     //     footer={footer}
@@ -57,7 +66,17 @@ export function PageLayout({
     //     publicStoreDomain={publicStoreDomain}
     //   />
     // </Aside.Provider>
-    <HeroSection />
+    <>
+      <HeroSection />
+
+      <div className="min-h-screen">
+        {/* Use Suspense to handle lazy loading */}
+        <Suspense fallback={<p className="text-black">Loading 3D Model...</p>}>
+          <Model3d />
+        </Suspense>
+        <div className="h-screen"></div> Extra space for scrolling
+      </div>
+    </>
   );
 }
 
